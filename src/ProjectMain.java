@@ -68,6 +68,7 @@ public class ProjectMain {
             validChoice = choice >= 1 && choice < songList.size();
             if (validChoice) {
                 song = songList.get(choice);
+                System.out.println("Selected Song: " + song.getSongName());
             } else {
                 System.out.println("That is not a valid choice.");
             }
@@ -82,7 +83,7 @@ public class ProjectMain {
     private static void displayChoices() {
         System.out.println(printCharNTimes(INTRO_CHAR, INTRO_N));
         System.out.println("What song would you like to play?");
-        System.out.println("Input a Number (0 to exit)");
+        System.out.println("Input a Number");
         System.out.println();
         // Songs
         System.out.println("0- *Exit Application*");
@@ -126,5 +127,7 @@ public class ProjectMain {
         songList.add(new IsabellasLullaby());
         songList.add(new Liebesleid());
         songList.add(new MerryGoRoundOfLife());
+        songList.add(new MoonlightSonata());
+        songList.add(new HikaruNara());
     }
 }

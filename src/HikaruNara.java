@@ -7,14 +7,13 @@ import org.jfugue.pattern.Pattern;
 /**
  * 
  */
-public class Lit implements Song {
+public class HikaruNara implements Song {
 
     // Song method
     public Pattern getPattern() {
         Pattern pattern = null;
         try {
-            pattern = MidiFileManager.loadPatternFromMidi(new File("Lit.mid"));
-            pattern.setTempo("Presto");
+            pattern = MidiFileManager.loadPatternFromMidi(new File("HikaruN.mid"));
         } catch (IOException e) {
             System.out.println("ERROR: Failed to load Debug MIDI file.");
         } catch (InvalidMidiDataException e) {
@@ -24,6 +23,6 @@ public class Lit implements Song {
     }
 
     public String getSongName() {
-        return "Lit";
+        return "Hikaru Nara";
     }
 }
