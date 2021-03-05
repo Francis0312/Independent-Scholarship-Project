@@ -24,13 +24,23 @@ public class ProjectMain {
 
     public static void main(String[] args) {
         displayIntro();
-        displayChoices();
-        
+        // Objects used every iteration
         Scanner kb = new Scanner(System.in);
-        Song songChoice = getUserChoice(kb);
         Player player = new Player();
-        Pattern songPattern = songChoice.getPattern();
-        player.play(songPattern);
+        // Fence Post - first run is guaranteed
+        displayChoices();
+        Song songChoice = getUserChoice(kb);
+        // Endless loop of the main program
+        boolean quit = songChoice == null;
+        while (!quit) {
+            // Playing the chosen song.
+            Pattern songPattern = songChoice.getPattern();
+            player.play(songPattern);
+            // Getting User Choice
+            displayChoices();
+            songChoice = getUserChoice(kb);
+            quit = songChoice == null; // If userChoice returns null, then exit 
+        }
     }
 
     /**
@@ -46,6 +56,15 @@ public class ProjectMain {
             System.out.print("\nChoice: ");
             int choice = kb.nextInt();
             switch (choice) {
+                case -1:
+                    System.out.println("DEBUG Option chosen");
+                    song = new DebugSong();
+                    validChoice = true;
+                    break;
+                case 0: 
+                    System.out.println("Exiting ... ");
+                    validChoice = true;
+                    break;
                 case 1:
                     song = new OdeToJoy();
                     System.out.println("Selected Song: Ode To Joy");
@@ -56,25 +75,42 @@ public class ProjectMain {
                     System.out.println("Selected Song: Watashi No Uso");
                     validChoice = true;
                     break;
+                case 3: 
+                    song = new IsabellasLullaby();
+                    System.out.println("Selected Song: Isabella's Lullaby");
+                    validChoice = true;
+                    break;
+                case 4: 
+                    song = new OneSummersDay();
+                    System.out.println("Selected Song: One Summer's Day");
+                    validChoice = true;
+                    break;
                 default: 
                     System.out.println("That is not a valid choice.");
                     break;
             }
         }
+        System.out.println();
         return song;
     }
 
-    // Prints the song choices
+    /**
+     * Prints the song choices
+     */
     private static void displayChoices() {
         System.out.println(printCharNTimes(INTRO_CHAR, INTRO_N));
         System.out.println("What song would you like to play?");
-        System.out.println("(Input a Number)");
+        System.out.println("Input a Number (0 to exit)");
         System.out.println();
         // Songs
         int songNum = 1;
         System.out.println(songNum + "- Ode To Joy");
         songNum++;
         System.out.println(songNum + "- Watashi no Uso");
+        songNum++;
+        System.out.println(songNum + "- Isabella's Lullaby");
+        songNum++;
+        System.out.println(songNum + "- One Summer's Day");
         System.out.println(printCharNTimes(INTRO_CHAR, INTRO_N));
     }
 
@@ -102,7 +138,5 @@ public class ProjectMain {
         }
         return sb.toString();
     }
-
-    public static void playSong(String song) {}
 
 }

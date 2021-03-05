@@ -7,7 +7,6 @@ public class OdeToJoy implements Song {
 
     @Override
     public Pattern getPattern() {
-        // TODO Auto-generated method stub
         return null;
     }
     
