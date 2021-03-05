@@ -11,5 +11,9 @@ public class DebugSong implements Song {
     public Pattern getPattern() {
         return new Pattern("C+E+G C+E+G C+E+G C+E+G");
     }
-    
+
+    @Override
+    public String getSongName() {
+        return "DEBUG";
+    }
 }

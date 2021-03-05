@@ -3,7 +3,6 @@ import java.io.IOException;
 import javax.sound.midi.InvalidMidiDataException;
 import org.jfugue.midi.MidiFileManager;
 import org.jfugue.pattern.Pattern;
-import org.jfugue.player.Player;
 
 /**
  * 
@@ -21,5 +20,9 @@ public class OneSummersDay implements Song {
             System.out.println("ERROR: Failed to parse MIDI data for debug song");
         } 
         return pattern;
+    }
+
+    public String getSongName() {
+        return "One Summer's Day";
     }
 }

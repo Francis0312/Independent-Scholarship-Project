@@ -21,4 +21,8 @@ public class WatashiNoUso implements Song {
         } 
         return pattern;
     }
+
+    public String getSongName() {
+        return "Watashi no Uso";
+    }
 }

@@ -6,6 +6,8 @@ import org.jfugue.player.Player;
 import org.jfugue.theory.Chord;
 import org.jfugue.theory.ChordProgression;
 import org.jfugue.theory.Note;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Application that plays a hand-written song using JFugue 5.0's library.
@@ -20,9 +22,12 @@ public class ProjectMain {
     
     // Constants
     private static char INTRO_CHAR = '*';
+    private static int EXIT_CHOICE = 0;
     private static int INTRO_N = 35;
+    private static List<Song> songList = new ArrayList<>();
 
     public static void main(String[] args) {
+        initSongList();
         displayIntro();
         // Objects used every iteration
         Scanner kb = new Scanner(System.in);
@@ -55,39 +60,16 @@ public class ProjectMain {
         while (!validChoice) {    
             System.out.print("\nChoice: ");
             int choice = kb.nextInt();
-            switch (choice) {
-                case -1:
-                    System.out.println("DEBUG Option chosen");
-                    song = new DebugSong();
-                    validChoice = true;
-                    break;
-                case 0: 
-                    System.out.println("Exiting ... ");
-                    validChoice = true;
-                    break;
-                case 1:
-                    song = new OdeToJoy();
-                    System.out.println("Selected Song: Ode To Joy");
-                    validChoice = true;
-                    break;
-                case 2: 
-                    song = new WatashiNoUso();
-                    System.out.println("Selected Song: Watashi No Uso");
-                    validChoice = true;
-                    break;
-                case 3: 
-                    song = new IsabellasLullaby();
-                    System.out.println("Selected Song: Isabella's Lullaby");
-                    validChoice = true;
-                    break;
-                case 4: 
-                    song = new OneSummersDay();
-                    System.out.println("Selected Song: One Summer's Day");
-                    validChoice = true;
-                    break;
-                default: 
-                    System.out.println("That is not a valid choice.");
-                    break;
+            // Early return null to terminate program
+            if (choice == EXIT_CHOICE) {
+                return song;
+            } 
+            // Make sure it is valid
+            validChoice = choice >= 1 && choice < songList.size();
+            if (validChoice) {
+                song = songList.get(choice);
+            } else {
+                System.out.println("That is not a valid choice.");
             }
         }
         System.out.println();
@@ -103,14 +85,10 @@ public class ProjectMain {
         System.out.println("Input a Number (0 to exit)");
         System.out.println();
         // Songs
-        int songNum = 1;
-        System.out.println(songNum + "- Ode To Joy");
-        songNum++;
-        System.out.println(songNum + "- Watashi no Uso");
-        songNum++;
-        System.out.println(songNum + "- Isabella's Lullaby");
-        songNum++;
-        System.out.println(songNum + "- One Summer's Day");
+        System.out.println("0- *Exit Application*");
+        for (int curSong = 1; curSong < songList.size(); curSong++) {
+            System.out.println(curSong + " - " + songList.get(curSong).getSongName());
+        }
         System.out.println(printCharNTimes(INTRO_CHAR, INTRO_N));
     }
 
@@ -139,4 +117,14 @@ public class ProjectMain {
         return sb.toString();
     }
 
+    // Initializes the List of Songs
+    private static void initSongList() {
+        songList.add(new DebugSong());
+        // Starting at Index 1 of List
+        songList.add(new OneSummersDay());
+        songList.add(new WatashiNoUso());
+        songList.add(new IsabellasLullaby());
+        songList.add(new Liebesleid());
+        songList.add(new MerryGoRoundOfLife());
+    }
 }
