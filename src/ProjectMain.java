@@ -1,13 +1,13 @@
-import java.io.File;
-import java.io.IOException;
 import java.util.Scanner;
 import org.jfugue.pattern.Pattern;
 import org.jfugue.player.Player;
-import org.jfugue.theory.Chord;
-import org.jfugue.theory.ChordProgression;
-import org.jfugue.theory.Note;
 import java.util.ArrayList;
 import java.util.List;
+import java.io.File; // Imports that will be needed later
+import java.io.IOException;
+import org.jfugue.theory.Chord;
+import org.jfugue.theory.ChordProgression;
+import org.jfugue.theory.Note; 
 
 /**
  * Application that plays a hand-written song using JFugue 5.0's library.
